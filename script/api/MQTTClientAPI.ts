@@ -8,7 +8,7 @@ import { OrderModel } from '../models/dtos/OrderModel';
 let client: mqtt.MqttClient;
 
 function onConnected() {
-  LocalLogger.Index.log('Electrion Client Api Connected to the MQTT broker');
+  LocalLogger.Index.log('Electrion Pos App Connected to the MQTT broker');
 }
 function messageIncoming(topic, message) {
   LocalLogger.Index.log(`Received message on topic ${topic}: ${message.toString()}`);

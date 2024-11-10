@@ -42,7 +42,6 @@ export function listen(db) {
     // 结束制作
     ipcMain.on(IpcDict.CODE_COMPLETE_COOKING_WITH_DRINKS, (event: IpcMainEvent, orderId: number) => {
         queryAllOrderAndDrinks(db, orderId).then((order: any) => {
-            console.log('获取长度是', order, ',', order.length);
             if (order.length === 1) {
                 completeCookingOrderWithDrinks(db, orderId).then(data => {
                     order[0].order_status = OrderStatus.COMPLETED;

@@ -26,7 +26,7 @@ export default class WinMain {
   private static winOption: BrowserWindowConstructorOptions = {
     icon: AppConfig.getAppLogo(), // 图标
     title: AppConfig.getAppTitle(), // 如果由 loadURL() 加载的 HTML 文件中含有标签 <title>，此属性将被忽略
-    minWidth: 1424,
+    minWidth: 1024,
     minHeight: 768,
     show: false, // 是否在创建时显示, 默认值为 true
     frame: true, // 是否有边框

@@ -1,7 +1,7 @@
 
 export class OrderModel {
     public orderId: number;
-    public orderType: number;
+    public orderType: string;
     public orderDate: string;
     public orderStatus: OrderStatus;
     public orderTotalAmount: number;
