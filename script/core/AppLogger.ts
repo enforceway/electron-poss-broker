@@ -52,7 +52,7 @@ export class LogFactory {
     this.logInst.transports.file.maxSize = 1048576
     this.logInst.transports.file.format = `[{y}-{m}-{d} {h}:{i}:{s}.{ms}] >> {text}`
     this.logInst.transports.ipc.level = ["index", "cmd"].includes(name) ? false : "info"
-    this.logInst.transports.console.level = true
+    this.logInst.transports.console.level = false
   }
 
   /** 统一处理, 可在这里对日志进行加密 */
