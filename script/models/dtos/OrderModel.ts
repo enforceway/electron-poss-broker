@@ -6,11 +6,11 @@ export class OrderModel {
     public orderStatus: OrderStatus;
     public orderTotalAmount: number;
 
-    constructor(id, type, date, total_amount) {
+    constructor(id, type, date, total_amount, orderStatus) {
         this.orderId = id || null;
         this.orderType = type;
         this.orderDate = date;
-        this.orderStatus = OrderStatus.CREATED;
+        this.orderStatus = orderStatus || OrderStatus.CREATED;
         this.orderTotalAmount = total_amount;
     }
 }

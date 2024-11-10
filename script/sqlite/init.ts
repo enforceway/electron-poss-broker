@@ -50,7 +50,7 @@ export function queryAllOrderAndDrinks(db, orderId?: number | string) {
             if (orderId !== undefined && orderId !== null) {
                 SQL_STATEMENTS = `${SQL_STATEMENTS} where order_id = ?`;
                 PREPAREMENTS_PARAMS.push(orderId);
-                LocalLogger.Index.log(`Order ${orderId} with selection sql is ${SQL_STATEMENTS}`);
+                LocalLogger.Index.log(`Order ${orderId} with selection sql is ${SQL_STATEMENTS} `, PREPAREMENTS_PARAMS);
             }
             // 执行一些数据库操作
             db.all(SQL_STATEMENTS, PREPAREMENTS_PARAMS, function (err, rows) {
@@ -125,6 +125,7 @@ function updateOrderStatus(db: sqlite3.Database, orderId: number, status: OrderS
         db.serialize(() => {
             // 开启事务
             db.run('BEGIN TRANSACTION');
+            LocalLogger.Index.log(`UPDATE orders set order_status = ? where order_id = ?`, orderId, ', ', status);
             // 执行一些数据库操作
             db.run('UPDATE orders set order_status = ? where order_id = ?', [
                 status,
@@ -145,6 +146,10 @@ function updateOrderStatus(db: sqlite3.Database, orderId: number, status: OrderS
     });
 };
 export function startCookingOrderWithDrinks(db, orderId: number) {
+    return updateOrderStatus(db, orderId, OrderStatus.IN_PROGRESS);
+};
+
+export function restartCookingOrderWithDrinks(db, orderId: number) {
     return updateOrderStatus(db, orderId, OrderStatus.IN_PROGRESS);
 };
 

@@ -33,6 +33,7 @@
             <template #default="scope">
               <el-button type="primary" text bg size="small" @click="startCooking(scope.row)">开始制作</el-button>
               <el-button type="default" text bg size="small" @click="completeCooking(scope.row)">制作完成</el-button>
+              <el-button type="default" text bg size="small" @click="restartCooking(scope.row)">重新制作</el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -185,6 +186,20 @@ const completeCookingCallbackFn = (event, orderDetail: OrderModel) => {
 };
 /* 结束制作 */
 
+/* 重新制作 */
+const restartCooking = (orderDetail) => {
+  debugger
+  loading.value = true
+  window.vIpcRenderer.send(IpcDict.CODE_RESTART_COOKING_WITH_DRINKS, orderDetail.order_id);
+};
+const restartCookingCallbackFn = (orderDetail) => {
+  debugger
+  loading.value = false
+  queryAllOrders();
+};
+
+/* 重新制作 */
+
 onMounted(() => {
   retrieveAllDrinks();
   queryAllOrders();
@@ -198,6 +213,8 @@ onMounted(() => {
   window.vIpcRenderer.on(IpcDict.CODE_START_COOKING_WITH_DRINKS, startCookingCallbackFn)
   // 完成制作
   window.vIpcRenderer.on(IpcDict.CODE_COMPLETE_COOKING_WITH_DRINKS, completeCookingCallbackFn)
+  // 开始制作
+  window.vIpcRenderer.on(IpcDict.CODE_RESTART_COOKING_WITH_DRINKS, restartCookingCallbackFn)
 });
 onUnmounted(() => {
   // off查询所有订单
@@ -210,6 +227,8 @@ onUnmounted(() => {
   window.vIpcRenderer.off(IpcDict.CODE_START_COOKING_WITH_DRINKS, startCookingCallbackFn)
   // 完成制作
   window.vIpcRenderer.off(IpcDict.CODE_COMPLETE_COOKING_WITH_DRINKS, completeCookingCallbackFn)
+  // 开始制作
+  window.vIpcRenderer.off(IpcDict.CODE_RESTART_COOKING_WITH_DRINKS, restartCookingCallbackFn)
 })
 </script>
 <style lang="scss" scoped>

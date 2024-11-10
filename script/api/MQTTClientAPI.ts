@@ -30,8 +30,16 @@ export function disconnect() {
   client.end();
 }
 
+export function orderCreated(orderDetail: OrderModel) {
+  client.publish('topic/cooking/created', JSON.stringify(orderDetail));
+}
+
 export function startCooking(orderDetail: OrderModel) {
   client.publish('topic/cooking/start', JSON.stringify(orderDetail));
+}
+
+export function restartCooking(orderDetail: OrderModel) {
+  client.publish('topic/cooking/restart', JSON.stringify(orderDetail));
 }
 
 export function completeCooking(orderDetail: OrderModel) {

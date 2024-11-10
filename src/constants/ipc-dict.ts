@@ -10,5 +10,6 @@ export default class IpcDict {
 
   static readonly CODE_START_COOKING_WITH_DRINKS = `开始制作饮品`
   static readonly CODE_COMPLETE_COOKING_WITH_DRINKS = `完成制作饮品`
+  static readonly CODE_RESTART_COOKING_WITH_DRINKS = `重新制作饮品`
 
 }
