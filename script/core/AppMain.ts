@@ -46,11 +46,18 @@ export default class AppMain {
       WinMain.create(app)
       WinMain.ipcListening()
 
+      // MQTT 服务
       LocalLogger.Cmd.info(`MQTT broker child process creation incomming!`);
       const brokerProcess = createUtilityProcessFromProcessCWD('script/broker/mqtt_broker.mjs');
       brokerProcess.on('spawn', () => {
         LocalLogger.Index.log(`MQTT broker child process created succefully!`);
         connectToMQTT();
+      });
+
+      // gRPC 服务
+      const grpcServiceProcess = createUtilityProcessFromProcessCWD('script/broker/grpc_server.mjs');
+      grpcServiceProcess.on('spawn', () => {
+        console.log(`gRPC service child process created succefully!`);
       });
     })
 

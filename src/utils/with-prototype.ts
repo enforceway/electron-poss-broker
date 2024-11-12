@@ -20,3 +20,13 @@ window.vIpcRenderer = require("electron")["ipcRenderer"]
 window.vLog = (logName: string, ...params: any[]) => {
   window.vIpcRenderer.send(IpcDict.CODE_02001, logName, ...params)
 }
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const ipcRenderer = require('electron').ipcRenderer;
+
+  ipcRenderer.on('cpu-usage', (event, cpuUsage) => {
+    console.log(`CPU 使用率: ${JSON.stringify(cpuUsage)} (用户), ${cpuUsage.system}% (系统)`);
+    console.log(`~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`)
+  });
+});

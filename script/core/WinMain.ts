@@ -10,6 +10,7 @@ import IpcDict from "../tool/ipc-dict"
 import { initDB } from '../sqlite/init';
 import sqlite3 from "sqlite3"
 import { listen } from "../api/OrderApiListener"
+import os from 'os';
 
 export default class WinMain {
 
@@ -111,6 +112,12 @@ export default class WinMain {
     // 初始化sql数据库，如果存在则什么也不做，如果没有则创建数据库
     this.db = initDB(app);
     listen(this.db);
+    
+     // 获取 CPU 使用率
+    setInterval(() => {
+      const cpuUsage = os.cpus();
+      this.winInst?.webContents.send('cpu-usage', cpuUsage);
+    }, 1000);
   }
 
   /** 打开控制台 */

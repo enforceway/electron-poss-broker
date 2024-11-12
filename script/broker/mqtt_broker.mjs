@@ -1,6 +1,6 @@
 import aedes from 'aedes';  // 创建 Aedes 实例
 import net from 'net';  // TCP 服务器
-import http from 'http';  // HTTP 服务器
+// import http from 'http';  // HTTP 服务器
 // import ws = require('websocket-stream');  // WebSocket 支持
 // 配置 TCP 和 WebSocket 端口
 const MQTT_PORT = 1883;
